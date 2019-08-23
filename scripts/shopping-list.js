@@ -67,12 +67,25 @@ const shoppingList = (function(){
       event.preventDefault();
       const newItemName = $('.js-shopping-list-entry').val();
       $('.js-shopping-list-entry').val('');
+      let error;
       api.createItem(newItemName)
-        .then(res => res.json())
+      
+        .then(res => {
+          if(!res.ok){
+            error = { code: res.status};
+          }
+          else{
+            return res.json();
+
+          }
+        })
+        
+
         .then(newItem => {
           store.addItem(newItem);
           render();
-        });
+        })
+        .catch(err => console.error(err));
     });
   }
   
@@ -89,9 +102,20 @@ const shoppingList = (function(){
       let obj = store.findById(id);
       //find it's checked property & set to variable
       let checkedStatus = !obj.checked;
-      api.updateItem(id,{'checked': checkedStatus});
-      store.findAndUpdate(id,{'checked': checkedStatus} );
-      render();
+      let error;
+      api.updateItem(id,{'checked': checkedStatus})
+        .then(res => {
+          if(!res.ok){
+            error = { code: res.status};
+          }
+          else{
+            store.findAndUpdate(id,{'checked': checkedStatus} );
+            render();
+        }
+      })
+      .catch(err => console.error(err));
+
+      
     });
   }
   
@@ -101,10 +125,22 @@ const shoppingList = (function(){
       // get the index of the item in store.items
       const id = getItemIdFromElement(event.currentTarget);
       // delete the item
-      api.deleteItem(id);
-      store.findAndDelete(id);
-      // render the updated shopping list
-      render();
+      let error;
+      api.deleteItem(id)
+        .then(res => {
+          if(!res.ok){
+            error = { code: res.status};
+          }
+          else{
+            store.findAndDelete(id);
+            // render the updated shopping list
+            render();
+          }
+        })
+        .catch(err => console.error(err));
+
+      
+      
     });
   }
   
@@ -115,10 +151,22 @@ const shoppingList = (function(){
       const itemName = $(event.currentTarget).find('.shopping-item').val();
       console.log(`id is ${id}`);
       console.log(`itemName is ${itemName}`);
-      api.updateItem(id,{'name': itemName});
-      store.findAndUpdate(id, {'name': itemName});
-      store.setItemIsEditing(id, false);
-      render();
+      let error;
+      api.updateItem(id,{'name': itemName})
+        .then(res => {
+          if(!res.ok){
+            error = { code: res.status};
+          }
+          else{
+            store.findAndUpdate(id, {'name': itemName});
+            store.setItemIsEditing(id, false);
+            render();
+
+          }
+        })
+        .catch(err => console.error(err));
+
+      
     });
   }
   
