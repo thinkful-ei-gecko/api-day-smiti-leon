@@ -14,20 +14,19 @@ fetch('https://thinkful-list-api.herokuapp.com/ei-student/items')
   .then(data => console.log(data));
 
 
-
-  api.getItems()
+api.getItems()
   .then(res => res.json())
   .then(jsonRes => {
     jsonRes.forEach(item => store.addItem(item));
     shoppingList.render();
   });
 
-api.createItem('Grapes') 
-  .then(res => res.json()) 
-  .then((newItem) => { 
-    store.addItem(newItem); 
-    shoppingList.render(); 
-}); 
+// api.createItem('Grapes') 
+//   .then(res => res.json()) 
+//   .then((newItem) => { 
+//     store.addItem(newItem); 
+//     shoppingList.render(); 
+// }); 
 
 api.getItems()
   .then(res => res.json())
@@ -37,4 +36,3 @@ api.getItems()
   })
   .then(res => res.json())
   .then(() => console.log('updated!'));
-  shoppingList.render(); 
