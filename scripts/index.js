@@ -13,12 +13,9 @@ fetch('https://thinkful-list-api.herokuapp.com/ei-student/items')
   .then(res => res.json())
   .then(data => console.log(data));
 
-api.createItem('pears')
+api.getItems() 
   .then(res => res.json())
-  .then((newItem) => {
-    return api.getItems();
-  })
-  .then(res => res.json())
-  .then((items) => {
-    console.log(items);
+  .then(jsonRes => {
+    jsonRes.forEach(item => store.addItem(item));
+    shoppingList.render();
   });

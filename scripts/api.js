@@ -4,19 +4,21 @@
 const api = (function() {
   const BASE_URL = 'https://thinkful-list-api.herokuapp.com/smiti';
 
-  function getItems() {
+  const getItems = function() {
     return fetch(`${BASE_URL}/items`);
-  }
 
-  function createItem(name) {
+  };
+
+  const createItem = function(name) {
     let newItem = JSON.stringify({name});
+    console.log(newItem);
     return fetch(`${BASE_URL}/items`,
       {
         method: 'POST',
         headers: new Headers({'Content-Type': 'application/json'}),
         body: newItem
       });
-  }
+  };
 
   return {
     getItems,
