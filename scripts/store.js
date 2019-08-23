@@ -13,6 +13,8 @@ const store = (function(){
   const findAndUpdate = function(id, newData){
     var findId = this.findById(id);
     Object.assign(findId, newData);
+    console.log(`newData is ${newData}`);
+    console.log(`obj is ${Object.keys(findId)}`);
   };
 
   
