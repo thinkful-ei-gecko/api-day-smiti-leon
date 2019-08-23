@@ -36,3 +36,4 @@ api.getItems()
   })
   .then(res => res.json())
   .then(() => console.log('updated!'));
+
