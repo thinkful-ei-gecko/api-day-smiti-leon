@@ -7,3 +7,8 @@ $(document).ready(function() {
 });
 
 store.items.push(Item.create('apples'));
+
+fetch('https://thinkful-list-api.herokuapp.com/ei-student/items')
+  .then(res => res.json())
+  // eslint-disable-next-line no-console
+  .then(data => console.log(data));
