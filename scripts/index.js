@@ -9,7 +9,6 @@ $(document).ready(function() {
 
 store.items.push(Item.create('apples'));
 
-
 fetch('https://thinkful-list-api.herokuapp.com/ei-student/items')
   .then(res => res.json())
   .then(data => console.log(data));
