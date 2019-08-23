@@ -8,7 +8,18 @@ const api = (function() {
     return fetch(`${BASE_URL}/items`);
   }
 
+  function createItem(name) {
+    let newItem = JSON.stringify({name});
+    return fetch(`${BASE_URL}/items`,
+      {
+        method: 'POST',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        body: newItem
+      });
+  }
+
   return {
-    getItems
+    getItems,
+    createItem
   };
 })();
